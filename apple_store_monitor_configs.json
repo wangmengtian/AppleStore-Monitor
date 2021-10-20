@@ -1,19 +1,35 @@
 {
   "selected_products": {
-    "MGYJ3CH/A": [
-      "AirPods Max",
-      "AirPods Max - \u94f6\u8272"
+    "MKN33CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Nike Series 7 (GPS)\uff1b41 \u6beb\u7c73\u661f\u5149\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u767d\u91d1\u914d\u9ed1\u8272 Nike \u8fd0\u52a8\u8868\u5e26 - \u6807\u51c6\u53f7"
     ],
-    "MLHG3CH/A": [
-      "iPhone 13 Pro Max",
-      "512GB \u8fdc\u5cf0\u84dd\u8272"
+    "MKMY3CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Series 7 (GPS)\uff1b41 \u6beb\u7c73\u661f\u5149\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u661f\u5149\u8272\u8fd0\u52a8\u578b\u8868\u5e26 - \u6807\u51c6\u53f7"
+    ],
+    "MKNC3CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Nike Series 7 (GPS)\uff1b45 \u6beb\u7c73\u5348\u591c\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u7164\u9ed1\u914d\u9ed1\u8272 Nike \u8fd0\u52a8\u8868\u5e26 - \u6807\u51c6\u53f7"
+    ],
+    "MKNA3CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Nike Series 7 (GPS)\uff1b45 \u6beb\u7c73\u661f\u5149\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u767d\u91d1\u914d\u9ed1\u8272 Nike \u8fd0\u52a8\u8868\u5e26 - \u6807\u51c6\u53f7"
+    ],
+    "MKN53CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Series 7 (GPS)\uff1b45 \u6beb\u7c73\u5348\u591c\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u5348\u591c\u8272\u8fd0\u52a8\u578b\u8868\u5e26 - \u6807\u51c6\u53f7"
+    ],
+    "MKN63CH/A": [
+      "Apple Watch Series 7",
+      "Apple Watch Series 7 (GPS)\uff1b45 \u6beb\u7c73\u661f\u5149\u8272\u94dd\u91d1\u5c5e\u8868\u58f3\uff1b\u661f\u5149\u8272\u8fd0\u52a8\u578b\u8868\u5e26 - \u6807\u51c6\u53f7"
     ]
   },
-  "selected_area": "\u4e0a\u6d77 \u4e0a\u6d77 \u9ec4\u6d66\u533a",
+  "selected_area": "\u5317\u4eac \u5317\u4eac \u671d\u9633\u533a",
   "notification_configs": {
     "dingtalk": {
-      "access_token": "",
-      "secret_key": ""
+      "access_token": "ab857bb92591f01d3336ca26cc01935a487096f211db5ea2378b88c0a7f0bb4a",
+      "secret_key": "SEC3a0d0f243ef244539cf16cbb92db27ba564b30e388870be3742304053ffd07d7"
     },
     "telegram": {
       "bot_token": "",
@@ -21,5 +37,74 @@
       "http_proxy": ""
     }
   },
-  "scan_interval": 30
+  "scan_interval": 30,
+  "selected_product_with_options": {
+    "Z0YQ": {
+        "MKNE3CH/A,MKUH3FE/A": "41 星光色 (GPS) 运动表带 (1英伦薰衣草色)",
+        "MKNE3CH/A,MKUF3FE/A": "41 星光色 (GPS) 运动表带 (2金盏花色)",
+        "MKNE3CH/A,MKUJ3FE/A": "41 星光色 (GPS) 运动表带 (3绛樱桃色)",
+        "MKNE3CH/A,MKU73FE/A": "41 星光色 (GPS) 运动表带 (4苜蓿草色)",
+        "MKNE3CH/A,MKUE3FE/A": "41 星光色 (GPS) 运动表带 (5深邃蓝色)",
+        "MKNE3CH/A,MKU83FE/A": "41 星光色 (GPS) 运动表带 (6午夜色)",
+        "MKNE3CH/A,MKUD3CH/A": "41 星光色 (GPS) 运动表带 (12红色)",
+        "MKNP3CH/A,MKUY3FE/A": "45 星光色 (GPS) 运动表带 (1英伦薰衣草色)",
+        "MKNP3CH/A,MKUX3FE/A": "45 星光色 (GPS) 运动表带 (2金盏花色)",
+        "MKNP3CH/A,MKV13FE/A": "45 星光色 (GPS) 运动表带 (3绛樱桃色)",
+        "MKNP3CH/A,MKUN3FE/A": "45 星光色 (GPS) 运动表带 (4苜蓿草色)",
+        "MKNP3CH/A,MKUW3FE/A": "45 星光色 (GPS) 运动表带 (5深邃蓝色)",
+        "MKNP3CH/A,MKUQ3FE/A": "45 星光色 (GPS) 运动表带 (6午夜色)",
+        "MKNP3CH/A,MKUV3CH/A": "45 星光色 (GPS) 运动表带 (12红色)",
+        "MKNN3CH/A,MKUY3FE/A": "45 午夜色 (GPS) 运动表带 (1英伦薰衣草色)",
+        "MKNN3CH/A,MKUX3FE/A": "45 午夜色 (GPS) 运动表带 (2金盏花色)",
+        "MKNN3CH/A,MKV13FE/A": "45 午夜色 (GPS) 运动表带 (3绛樱桃色)",
+        "MKNN3CH/A,MKUN3FE/A": "45 午夜色 (GPS) 运动表带 (4苜蓿草色)",
+        "MKNN3CH/A,MKUW3FE/A": "45 午夜色 (GPS) 运动表带 (5深邃蓝色)",
+        "MKNN3CH/A,MKUU3FE/A": "45 午夜色 (GPS) 运动表带 (7星光色)",
+        "MKNN3CH/A,MKUV3CH/A": "45 午夜色 (GPS) 运动表带 (12红色)",
+        "MKNE3CH/A,ML2N3FE/A": "41 星光色 (GPS) 回环式运动表带 (1黍米色配白色)",
+        "MKNE3CH/A,ML2P3FE/A": "41 星光色 (GPS) 回环式运动表带 (2柚粉配小麦色)",
+        "MKNE3CH/A,ML2R3FE/A": "41 星光色 (GPS) 回环式运动表带 (3绛樱桃色配松林绿色)",
+        "MKNE3CH/A,ML2Q3FE/A": "41 星光色 (GPS) 回环式运动表带 (4深邃蓝配苔绿色)",
+        "MKNE3CH/A,ML2T3FE/A": "41 星光色 (GPS) 回环式运动表带 (5风暴黑配灰色)",
+        "MKNE3CH/A,ML8F3CH/A": "41 星光色 (GPS) 回环式运动表带 (8红色)",
+        "MKNP3CH/A,ML2Y3FE/A": "45 星光色 (GPS) 回环式运动表带 (1黍米色配白色)",
+        "MKNP3CH/A,ML303FE/A": "45 星光色 (GPS) 回环式运动表带 (2柚粉配小麦色)",
+        "MKNP3CH/A,ML323FE/A": "45 星光色 (GPS) 回环式运动表带 (3绛樱桃色配松林绿色)",
+        "MKNP3CH/A,ML313FE/A": "45 星光色 (GPS) 回环式运动表带 (4深邃蓝配苔绿色)",
+        "MKNP3CH/A,ML333FE/A": "45 星光色 (GPS) 回环式运动表带 (5风暴黑配灰色)",
+        "MKNP3CH/A,MYAA2FE/A": "45 星光色 (GPS) 回环式运动表带 (7木炭色)",
+        "MKNP3CH/A,ML8G3CH/A": "45 星光色 (GPS) 回环式运动表带 (8红色)",
+        "MKNN3CH/A,ML2Y3FE/A": "45 午夜色 (GPS) 回环式运动表带 (1黍米色配白色)",
+        "MKNN3CH/A,ML303FE/A": "45 午夜色 (GPS) 回环式运动表带 (2柚粉配小麦色)",
+        "MKNN3CH/A,ML323FE/A": "45 午夜色 (GPS) 回环式运动表带 (3绛樱桃色配松林绿色)",
+        "MKNN3CH/A,ML313FE/A": "45 午夜色 (GPS) 回环式运动表带 (4深邃蓝配苔绿色)",
+        "MKNN3CH/A,ML333FE/A": "45 午夜色 (GPS) 回环式运动表带 (5风暴黑配灰色)",
+        "MKNN3CH/A,MYAA2FE/A": "45 午夜色 (GPS) 回环式运动表带 (7木炭色)",
+        "MKNN3CH/A,ML8G3CH/A": "45 午夜色 (GPS) 回环式运动表带 (8红色)",
+        "MKNK3CH/A,ML853FE/A": "41 星光色 Nike (GPS) 运动表带 (橙粉配淡粉)",
+        "MKNK3CH/A,ML873FE/A": "41 星光色 Nike (GPS) 运动表带 (橄榄灰配军裤卡其色)",
+        "MKNK3CH/A,ML863FE/A": "41 星光色 Nike (GPS) 运动表带 (深海军蓝)",
+        "MKNK3CH/A,ML833FE/A": "41 星光色 Nike (GPS) 运动表带 (煤黑配黑色)",
+        "MKNK3CH/A,ML2V3FE/A": "41 星光色 Nike (GPS) 回环式运动表带 (军裤卡其色)",
+        "MKNK3CH/A,ML2U3FE/A": "41 星光色 Nike (GPS) 回环式运动表带 (黑色)",
+        "MKNK3CH/A,ML2W3FE/A": "41 星光色 Nike (GPS) 回环式运动表带 (雪峰白色)",
+        "MKNK3CH/A,MJWN3FE/A": "41 星光色 Nike (GPS) 回环式运动表带 (彩虹版)",
+        "MKNW3CH/A,ML8A3FE/A": "45 星光色 Nike (GPS) 运动表带 (橙粉配淡粉)",
+        "MKNW3CH/A,ML8D3FE/A": "45 星光色 Nike (GPS) 运动表带 (橄榄灰配军裤卡其色)",
+        "MKNW3CH/A,ML8C3FE/A": "45 星光色 Nike (GPS) 运动表带 (深海军蓝)",
+        "MKNW3CH/A,ML883FE/A": "45 星光色 Nike (GPS) 运动表带 (煤黑配黑色)",
+        "MKNW3CH/A,ML373FE/A": "45 星光色 Nike (GPS) 回环式运动表带 (雪峰白色)",
+        "MKNW3CH/A,ML363FE/A": "45 星光色 Nike (GPS) 回环式运动表带 (军裤卡其色)",
+        "MKNW3CH/A,ML343FE/A": "45 星光色 Nike (GPS) 回环式运动表带 (黑色)",
+        "MKNW3CH/A,MJWP3FE/A": "45 星光色 Nike (GPS) 回环式运动表带 (彩虹版)",
+        "MKNX3CH/A,ML8A3FE/A": "45 午夜色 Nike (GPS) 运动表带 (橙粉配淡粉)",
+        "MKNX3CH/A,ML8D3FE/A": "45 午夜色 Nike (GPS) 运动表带 (橄榄灰配军裤卡其色)",
+        "MKNX3CH/A,ML8C3FE/A": "45 午夜色 Nike (GPS) 运动表带 (深海军蓝)",
+        "MKNX3CH/A,ML893FE/A": "45 午夜色 Nike (GPS) 运动表带 (白金配黑色)",
+        "MKNX3CH/A,ML373FE/A": "45 午夜色 Nike (GPS) 回环式运动表带 (雪峰白色)",
+        "MKNX3CH/A,ML363FE/A": "45 午夜色 Nike (GPS) 回环式运动表带 (军裤卡其色)",
+        "MKNX3CH/A,ML343FE/A": "45 午夜色 Nike (GPS) 回环式运动表带 (黑色)",
+        "MKNX3CH/A,MJWP3FE/A": "45 午夜色 Nike (GPS) 回环式运动表带 (彩虹版)"
+    }
+  }
 }
