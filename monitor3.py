@@ -221,34 +221,17 @@ class AppleStoreMonitor:
             print('--------------------')
             print("扫描配置已生成，并已写入到{}文件中\n请使用 python {} start 命令启动监控".format(file.name, os.path.abspath(__file__)))
 
-    def start(self):
+    def start(self, comb_config_no=None):
         """
         开始监控
         """
-        configs = json.load(open('apple_store_monitor_configs.json', encoding='utf-8'))
+        configs = json.load(open('apple_store_monitor_configs_comb.json', encoding='utf-8'))
         selected_products = configs["selected_products"]
         selected_area = configs["selected_area"]
         notification_configs = configs["notification_configs"]
         scan_interval = configs["scan_interval"]
-
-        products_info = []
-        for index, product_info in enumerate(selected_products.items()):
-            products_info.append("【{}】{}".format(index, " ".join(product_info[1])))
-        message = "准备开始监测，商品信息如下：\n{}\n取货区域：{}\n扫描频次：{}秒/次".format("\n".join(products_info), selected_area,
-                                                                   scan_interval)
-        Utils.log(message)
-        #Utils.send_message(notification_configs, message)
-
-        params = {
-            "location": selected_area,
-            "mt": "regular",
-        }
-
-        code_index = 0
-        product_codes = selected_products.keys()
-        for product_code in product_codes:
-            params["parts.{}".format(code_index)] = product_code
-            code_index += 1
+        option_config_name = "selected_product_with_options%d" % int(comb_config_no)
+        selected_product_with_options = configs[option_config_name]
 
         # 上次整点通知时间
         last_exactly_time = -1
@@ -256,107 +239,55 @@ class AppleStoreMonitor:
             available_list = []
             tm_hour = time.localtime(time.time()).tm_hour
             try:
-                # 更新请求时间
-                params["_"] = int(time.time() * 1000)
-
-                response = requests.get("https://www.apple.com.cn/shop/fulfillment-messages",
-                                        headers=AppleStoreMonitor.headers,
-                                        params=params)
-                
-                print(response.url)
-                # import pdb
-                # pdb.set_trace()
-                # print(json.dumps(params))
-
-                # json_result = json.loads(response.text)
-                try:
-                    json_result = json.loads(response.text)
-                except:
-                    print(response.text)
-                    raise
-                stores = json_result['body']['content']['pickupMessage']['stores']
-                Utils.log(
-                    '-------------------- 第{}次扫描 --------------------'.format(
-                        self.count))
-                for item in stores:
-                    store_name = item['storeName']
-                    print("-------------------- 直营店： {} --------------------".format(store_name))
-                    for product_code in product_codes:
-                        pickup_search_quote = item['partsAvailability'][product_code]['pickupSearchQuote']
-                        pickup_display = item['partsAvailability'][product_code]['pickupDisplay']
-                        store_pickup_product_title = item['partsAvailability'][product_code]['storePickupProductTitle']
-                        print('【{}】{}'.format(pickup_search_quote, store_pickup_product_title))
-                        if pickup_search_quote == '今天可取货' or pickup_display != 'unavailable':
-                            available_list.append((store_name, product_code, store_pickup_product_title))
-
-                if len(available_list) > 0:
-                    messages = []
-                    print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                    Utils.log("以下直营店预约可用：")
-                    for item in available_list:
-                        messages.append("【{}】 {}".format(item[0], item[2]))
-                        print("【{}】{}".format(item[0], item[2]))
-                    print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-
-                    Utils.send_message(notification_configs,
-                                       Utils.time_title("第{}次扫描到直营店有货，信息如下：\n{}".format(self.count, "\n".join(messages))))
-                
                 # ----------------- 扫描其他组合 ----------------
-                Utils.log('-------------------- 第{}次扫描 开始扫描其他组合 --------------------'.format(self.count))
+                Utils.log('-------------------- 第{}次扫描 开始扫描组合 --------------------'.format(self.count))
                 params_with_option = {
                     "location": selected_area,
                     "mt": "regular"
                 }
-                thread_list = []
-                for product_code, options_map in configs["selected_product_with_options"].items():
+                for product_code, options_map in selected_product_with_options.items():
                     params_with_option["parts.0"] = product_code
                     for option_code, product_name in options_map.items():
-                        t = ScanOneOptionThread(selected_area, product_code, product_name, option_code, self.count, notification_configs)
-                        t.start()
-                        thread_list.append(t)
-                for t in thread_list:
-                    t.join()
-                        # sleep_time = max(random.randint(1, 10), 5)
-                        # time.sleep(random.randint(2, 6))
-                        # Utils.log('-------------------- 第{}次扫描 {} --------------------'.format(self.count, product_name))
-                        # params_with_option["option.0"] = option_code
-                        # params_with_option["_"] = int(time.time() * 1000)
-                        # response = requests.get("https://www.apple.com.cn/shop/fulfillment-messages",
-                        #                         headers=AppleStoreMonitor.headers,
-                        #                         params=params_with_option)
-                        # print(response.url)
-                        # try:
-                        #     json_result = json.loads(response.text)
-                        # except:
-                        #     print(response.text)
-                        #     raise
-                        # stores = json_result['body']['content']['pickupMessage']['stores']
-                        # message = ''
-                        # for item in stores:
-                        #     store_name = item['storeName']
-                        #     if store_name in ['大连恒隆广场', '百年城', '济南恒隆广场', '青岛万象城']:
-                        #         continue
-                        #     # print("直营店： {}".format(store_name))
-                        #     for product_code in item['partsAvailability']:
-                        #         pickup_search_quote = item['partsAvailability'][product_code]['pickupSearchQuote']
-                        #         pickup_display = item['partsAvailability'][product_code]['pickupDisplay']
-                        #         # store_pickup_product_title = item['partsAvailability'][product_code]['storePickupProductTitle']
-                        #         message += '[{}-{}]'.format(store_name, pickup_search_quote)
-                        #         if pickup_search_quote == '今天可取货' or pickup_display != 'unavailable':
-                        #             available_list.append((store_name, product_code, product_name))
-                        # print(message)
+                        time.sleep(random.randint(0, 2))
+                        Utils.log('-------------------- 第{}次扫描 {} --------------------'.format(self.count, product_name))
+                        params_with_option["option.0"] = option_code
+                        params_with_option["_"] = int(time.time() * 1000)
+                        response = requests.get("https://www.apple.com.cn/shop/fulfillment-messages",
+                                                headers=AppleStoreMonitor.headers,
+                                                params=params_with_option)
+                        print(response.url)
+                        try:
+                            json_result = json.loads(response.text)
+                        except:
+                            print(response.text)
+                            raise
+                        stores = json_result['body']['content']['pickupMessage']['stores']
+                        message = ''
+                        for item in stores:
+                            store_name = item['storeName']
+                            if store_name in ['大连恒隆广场', '百年城', '济南恒隆广场', '青岛万象城']:
+                                continue
+                            # print("直营店： {}".format(store_name))
+                            for product_code in item['partsAvailability']:
+                                pickup_search_quote = item['partsAvailability'][product_code]['pickupSearchQuote']
+                                pickup_display = item['partsAvailability'][product_code]['pickupDisplay']
+                                # store_pickup_product_title = item['partsAvailability'][product_code]['storePickupProductTitle']
+                                message += '{}-{}|'.format(store_name, pickup_search_quote)
+                                if pickup_search_quote == '今天可取货' or pickup_display != 'unavailable':
+                                    available_list.append((store_name, product_code, product_name))
+                        print(message)
 
-                        # if len(available_list) > 0:
-                        #     messages = []
-                        #     print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-                        #     Utils.log("以下直营店预约可用：")
-                        #     for item in available_list:
-                        #         messages.append("【{}】 {}".format(item[0], item[2]))
-                        #         print("【{}】{}".format(item[0], item[2]))
-                        #     print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                        if len(available_list) > 0:
+                            messages = []
+                            print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+                            Utils.log("以下直营店预约可用：")
+                            for item in available_list:
+                                messages.append("【{}】 {}".format(item[0], item[2]))
+                                print("【{}】{}".format(item[0], item[2]))
+                            print("命中货源，请注意 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
-                        #     Utils.send_message(notification_configs,
-                        #                     Utils.time_title("第{}次扫描到直营店有货，信息如下：\n{}".format(self.count, "\n".join(messages))))
+                            Utils.send_message(notification_configs,
+                                            Utils.time_title("第{}次扫描到直营店有货，信息如下：\n{}".format(self.count, "\n".join(messages))))
 
                 # ---------------------------------------------
 
@@ -367,7 +298,7 @@ class AppleStoreMonitor:
                 # 6:00 ~ 23:00才发送异常消息
                 if 6 <= tm_hour <= 23:
                     Utils.send_message(notification_configs,
-                                   Utils.time_title("第{}次扫描出现异常：{}".format(self.count, repr(err))))
+                                   Utils.time_title("第{}次扫描出现异常：{}。错误次数 {}".format(self.count, repr(err), self.err_count)))
                 time.sleep(60)
                 if self.err_count > 3:
                     time.sleep(240)
@@ -379,8 +310,8 @@ class AppleStoreMonitor:
                     time.sleep(86400)
 
             if len(available_list) == 0:
-                interval = max(random.randint(int(scan_interval / 2), scan_interval * 2), 5)
-                # interval = random.randint(3, 6)
+                # interval = max(random.randint(int(scan_interval / 2), scan_interval * 2), 5)
+                interval = random.uniform(5, 30)
                 Utils.log('{}秒后进行第{}次尝试...'.format(interval, self.count+1))
 
                 # 整点通知，用于阶段性检测应用是否正常
@@ -473,3 +404,10 @@ if __name__ == '__main__':
 
     if args[1] == "start":
         AppleStoreMonitor().start()
+
+    if args[1] == "start1":
+        AppleStoreMonitor().start(1)
+    if args[1] == "start2":
+        AppleStoreMonitor().start(2)
+    if args[1] == "start3":
+        AppleStoreMonitor().start(3)
