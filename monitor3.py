@@ -16,33 +16,35 @@ import hmac
 import hashlib
 import base64
 import traceback
+import socket
 from threading import Thread
 import urllib.parse
 
 
 class Utils:
+    ip = socket.gethostbyname(socket.gethostname())
 
     @staticmethod
     def time_title(message):
-        return "[{}] {}".format(datetime.datetime.now().strftime('%H:%M:%S'), message)
+        return "[{}][{}] {}".format(datetime.datetime.now().strftime('%H:%M:%S'), Utils.ip, message)
 
     @staticmethod
     def log(message):
         print(Utils.time_title(message))
 
     @staticmethod
-    def send_message(notification_configs, message, **kwargs):
+    def send_message(notification_configs, message, at=True, **kwargs):
         if len(message) == 0:
             return
 
         # DingTalk message
-        Utils.send_dingtalk_message(notification_configs["dingtalk"], message, **kwargs)
+        Utils.send_dingtalk_message(notification_configs["dingtalk"], message, at=at, **kwargs)
 
         # Telegram message
         Utils.send_telegram_message(notification_configs["telegram"], message, **kwargs)
 
     @staticmethod
-    def send_dingtalk_message(dingtalk_configs, message, **kwargs):
+    def send_dingtalk_message(dingtalk_configs, message, at=True, **kwargs):
         if len(dingtalk_configs["access_token"]) == 0 or len(dingtalk_configs["secret_key"]) == 0:
             return
 
@@ -67,14 +69,17 @@ class Utils:
             "msgtype": "text" if "message_type" not in kwargs else kwargs["message_type"],
             "text": {
                 "content": message
-            },
-            "at": {
-                "atMobiles":[
-                    "13141327620",
-                    "15811566905"
-                ],
             }
         }
+        if at:
+            content.update({
+                "at": {
+                    "atMobiles":[
+                        "13141327620",
+                        "15811566905"
+                    ],
+                }
+            })
 
         response = requests.post("https://oapi.dingtalk.com/robot/send", headers=headers, params=params, json=content)
         print(response.json())
@@ -317,7 +322,7 @@ class AppleStoreMonitor:
                 # 整点通知，用于阶段性检测应用是否正常
                 if last_exactly_time != tm_hour and (6 <= tm_hour <= 23):
                     Utils.send_message(notification_configs,
-                                       Utils.time_title("已扫描{}次，monitor2扫描程序运行正常".format(self.count)))
+                                       Utils.time_title("已扫描{}次，monitor2扫描程序运行正常".format(self.count)), at=False)
                     last_exactly_time = tm_hour
                 time.sleep(interval)
             else:
